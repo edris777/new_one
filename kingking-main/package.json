@@ -1,0 +1,16 @@
+{
+  "name": "dinkhub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DinkHub — pickleball court marketplace for Marawi City. Vanilla-JS frontend and a zero-dependency Node JSON API (node:http + node:sqlite), ported from the Django original.",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "seed": "node server/index.js --seed",
+    "start:legacy": "node --experimental-sqlite server/index.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}

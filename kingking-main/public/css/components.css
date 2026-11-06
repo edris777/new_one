@@ -1,0 +1,68 @@
+/* ==========================================================================
+   Additive component styles for the client-rendered build.
+   Nothing here redefines a selector from css/app.css — app.css is the
+   DinkHub design system copied verbatim and stays untouched so every
+   transition, keyframe and hover motion behaves exactly as before.
+   These rules only cover the two widgets that never existed server-side
+   (modal + route placeholder) and small layout helpers.
+   ========================================================================== */
+
+:root {
+  --modal-bd: rgba(20, 18, 14, .35);
+}
+
+/* ---------- modal ---------- */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 150; background: rgba(9, 18, 13, .55);
+  backdrop-filter: blur(3px); opacity: 0; transition: opacity .3s var(--ease);
+}
+.modal-backdrop[hidden] { display: none; }
+.modal-backdrop.is-open { opacity: 1; }
+
+.modal {
+  position: fixed; inset: 0; z-index: 160; display: grid; place-items: center;
+  padding: 24px; pointer-events: none;
+}
+.modal__card {
+  pointer-events: auto; width: min(100%, 560px); max-height: 86vh; overflow: auto;
+  background: var(--white); border: 1px solid var(--line-soft); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg); padding: 26px;
+  animation: modalIn .4s var(--ease);
+}
+@keyframes modalIn { from { opacity: 0; transform: translateY(14px) scale(.985); } }
+.modal__head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+.modal__head h2 { font-size: 1.24rem; letter-spacing: -.025em; flex: 1; }
+.modal__head p { font-size: .86rem; color: var(--ink-mute); margin-top: 4px; }
+.modal__x {
+  width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); flex: none;
+  background: none; color: var(--ink-soft); display: grid; place-items: center; cursor: pointer;
+  transition: background .25s, color .25s, transform .35s var(--ease);
+}
+.modal__x:hover { background: rgba(20, 18, 14, .05); color: var(--ink); transform: rotate(90deg); }
+.modal__x .ico { width: 15px; height: 15px; }
+.modal__body { display: flex; flex-direction: column; gap: 14px; font-size: .92rem; color: var(--ink-soft); }
+.modal__foot { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; flex-wrap: wrap; }
+
+@media (max-width: 680px) {
+  .modal { padding: 14px; }
+  .modal__card { padding: 20px; border-radius: var(--r-md); }
+}
+
+/* ---------- route placeholder ---------- */
+.route-loading {
+  min-height: 40vh; display: grid; place-items: center; padding: 80px 0;
+  font-size: .9rem; color: var(--ink-mute);
+}
+
+/* ---------- small layout helpers used by the ported pages ---------- */
+.stack { display: flex; flex-direction: column; gap: 14px; }
+.row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.row--between { justify-content: space-between; }
+.grow { flex: 1; min-width: 0; }
+.ta-r { text-align: right; }
+.mono { font-variant-numeric: tabular-nums; }
+
+/* Court rows and booking lists keep their own app.css classes; these two
+   hooks only replace Django's {% for %} loop separators. */
+.court-list--tight .court-row { padding: 13px 16px; }
+.photo-strip__field { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }

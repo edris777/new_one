@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-variant="court">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PickleMarawi — Marawi City Pickleball Club</title>
+<meta name="description" content="Court booking, leagues, drills and club analytics for the Marawi City Pickleball Club." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="vendor/maplibre-gl.css" />
+<link rel="stylesheet" href="css/app.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2314161d'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23f4a036'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <div class="stage">
+    <div class="app-shell" id="appShell">
+      <!-- icon rail -->
+      <nav class="rail" id="rail" aria-label="Primary"></nav>
+
+      <div class="frame">
+        <header class="topbar" id="topbar"></header>
+        <div class="viewport" id="viewport">
+          <main class="view" id="view" tabindex="-1"></main>
+        </div>
+      </div>
+    </div>
+
+    <!-- floating variant switcher, mirrors the pill at the bottom of the reference clip -->
+    <div class="switcher" id="switcher" role="group" aria-label="Dashboard style"></div>
+  </div>
+
+  <div class="toast-host" id="toastHost" aria-live="polite"></div>
+  <div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/map.js"></script>
+  <!-- MapLibre GL ships inside the project: no CDN, no token, no API key -->
+  <script src="vendor/maplibre-gl.js"></script>
+  <script src="js/tiles.js"></script>
+  <script src="js/livemap.js"></script>
+  <script src="js/dashmap.js"></script>
+  <script src="js/maptour.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/pages.js"></script>
+  <script src="js/pages/roster.js"></script>
+  <script src="js/pages/booking.js"></script>
+  <script src="js/pages/play.js"></script>
+  <script src="js/pages/tournaments.js"></script>
+  <script src="js/pages/money.js"></script>
+  <script src="js/pages/system.js"></script>
+  <script src="js/pages/home.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

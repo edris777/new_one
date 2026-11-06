@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DinkHub — Find your court. Book your game.</title>
+<meta name="description" content="DinkHub is a pickleball court rental marketplace for Marawi City, Lanao del Sur. Discover courts, send booking requests, and manage reservations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+if (window.location.protocol === 'file:') {
+  document.documentElement.classList.add('file-launch');
+  const style = document.createElement('style');
+  style.textContent = [
+    '.file-launch{min-height:100%;background:#f5f4f0;color:#242821;font-family:Arial,sans-serif}',
+    '.file-launch body{box-sizing:border-box;min-height:100vh;margin:0;padding:24px;display:grid;place-items:center}',
+    '.file-launch *{box-sizing:border-box}',
+    '.file-launch .file-launch-card{width:min(100%,520px);padding:36px;border:1px solid #e6e2d8;border-radius:20px;background:#fff;box-shadow:0 16px 48px #24282112}',
+    '.file-launch h1{margin:0 0 12px;font-size:26px}',
+    '.file-launch p{margin:0 0 18px;line-height:1.6;color:#5d625a}',
+    '.file-launch a{display:inline-block;padding:12px 18px;border-radius:10px;background:#253b2d;color:white;font-weight:700;text-decoration:none}',
+    '.file-launch .file-launch-help{margin-top:22px;padding-top:18px;border-top:1px solid #eeeae2;font-size:14px}',
+    '.file-launch code{padding:3px 6px;border-radius:5px;background:#f1f0eb;color:#242821}'
+  ].join('');
+  document.head.appendChild(style);
+  document.addEventListener('DOMContentLoaded', function () {
+    document.body.innerHTML = '<main class="file-launch-card"><h1>Opening DinkHub</h1><p>This page needs the local DinkHub server. Checking whether it is running...</p><a href="http://localhost:3000/">Open DinkHub</a><p class="file-launch-help">If the link does not open the system, start the server from the project folder with <code>npm start</code>, then refresh this page.</p></main>';
+    fetch('http://localhost:3000/', { mode: 'no-cors', cache: 'no-store' })
+      .then(function () { window.location.replace('http://localhost:3000/'); })
+      .catch(function () {
+        document.querySelector('.file-launch-card > p').textContent =
+          'DinkHub cannot run from a file URL. Start its local server, then open the app using the button below.';
+      });
+  }, { once: true });
+}
+</script>
+<!-- DinkHub's design system, copied verbatim from static/css/style.css. -->
+<link rel="stylesheet" href="/css/app.css">
+<!-- Additive rules for the client-rendered parts only; nothing here restyles app.css. -->
+<link rel="stylesheet" href="/css/components.css">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<!-- templates/partials/sprite.html, included once so every <use href="#i-..."> resolves -->
+<svg xmlns="http://www.w3.org/2000/svg" class="sprite" aria-hidden="true">
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 3v4M16 3v4M3.5 10h17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 19.5c0-3.2 2.7-5.3 6-5.3s6 2.1 6 5.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 5.4a3 3 0 0 1 0 5.9M17.5 14.6c2 .6 3.5 2.3 3.5 4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-paddle" viewBox="0 0 24 24"><path d="M14.4 3.2c3.2-.6 6.4 1.6 6.4 5 0 3.6-3.2 6.7-6.9 6.7-2.4 0-4.3-1.5-5-3.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14.4 3.2C11 3.8 7.6 6.3 6.1 9.6c-.8 1.8.4 3.4 2.1 3.9 1.3.4 2.7.1 3.9-.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.9 14.6 4 21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="15.6" cy="8.6" r=".9" fill="currentColor"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.6 4.5L19 6.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5.6c0 4.3 3 7.6 7 9.4 4-1.8 7-5.1 7-9.4V6l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m9 12 2.2 2.2L15.5 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5V12l3.2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-parking" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 16V8h2.6a2.7 2.7 0 0 1 0 5.4H10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-shower" viewBox="0 0 24 24"><path d="M4 12h16a8 8 0 0 0-16 0Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 16v1.5M12 16v2.5M16 16v1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-light" viewBox="0 0 24 24"><path d="M9 17h6M10 20h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 3a6 6 0 0 0-3.5 10.9V17h7v-3.1A6 6 0 0 0 12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M3.5 9.5a13 13 0 0 1 17 0M6.5 13a9 9 0 0 1 11 0M9.5 16.4a4.6 4.6 0 0 1 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="19.4" r="1.1" fill="currentColor"/></symbol>
+  <symbol id="i-water" viewBox="0 0 24 24"><path d="M12 3.5s5.5 6 5.5 10a5.5 5.5 0 0 1-11 0c0-4 5.5-10 5.5-10Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.6 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.8l5.9-.8L12 3.6Z" fill="currentColor"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.5 4-2 1.4a11 11 0 0 0 5.1 5.1l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m4.5 8 7.5 5 7.5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="4" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="4" y="13" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="13" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 20c0-3.5 3.1-5.8 7-5.8s7 2.3 7 5.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M10 8l-4 4 4 4M6 12h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9.5 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 14h5l-1 7 9-11h-5l1-7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="4.4" cy="6" r="1.2" fill="currentColor"/><circle cx="4.4" cy="12" r="1.2" fill="currentColor"/><circle cx="4.4" cy="18" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 4h10v4a5 5 0 0 1-10 0V4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 6H4.5v1.5A3.5 3.5 0 0 0 8 11M17 6h2.5v1.5A3.5 3.5 0 0 1 16 11M12 13v4M8.5 20h7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="site">
+  <div id="siteHeader"></div>
+
+  <main id="main"></main>
+
+  <div id="siteFooter"></div>
+</div>
+
+<div class="toast-stack" id="toastStack" role="status" aria-live="polite"></div>
+<div class="modal-backdrop" id="modalBackdrop" hidden></div>
+
+<script src="/js/icons.js"></script>
+<script src="/js/data.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/store.js"></script>
+<script src="/js/ui.js"></script>
+<script src="/js/motion.js"></script>
+<script src="/js/partials.js"></script>
+<script src="/js/pages.js"></script>
+<script src="/js/pages/home.js"></script>
+<script src="/js/pages/browse.js"></script>
+<script src="/js/pages/venue.js"></script>
+<script src="/js/pages/venueForm.js"></script>
+<script src="/js/pages/booking.js"></script>
+<script src="/js/pages/receipt.js"></script>
+<script src="/js/pages/accounts.js"></script>
+<script src="/js/pages/dashboards.js"></script>
+<script src="/js/pages/info.js"></script>
+<script src="/js/pickle.js"></script>
+<script src="/js/shell.js"></script>
+</body>
+</html>
